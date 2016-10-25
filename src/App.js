@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import './App.css';
 
 const POSTS = [
@@ -32,45 +33,73 @@ class Item extends Component {
     const {item} = this.props; // deconstruction
     return (
       <a className="App-item" href="#">
-        <img className="App-item-image" src={`${item.id}.png`}/>
-        <div className="App-item-over">
+        <img className="App-item-image" src={`1.png`}/>
+        <div className="App-item-desc">
           <div className="App-item-title">{item.title}</div>
-          <div className="App-item-button">See Details &rarr;</div>
         </div>
       </a>
     )
   }
 }
 
-class App extends Component {
+export class Home extends Component {
+  render() {
+    return (
+    <div>
+      <div>
+        <div className="App-catalog">
+          <div className="App-catalog-row">
+            {CATALOG.slice(0, 3).map(item => <Item key={item.id} item={item}/>)}
+          </div>
+          <div className="App-catalog-row">
+            {CATALOG.slice(3, 6).map(item => <Item key={item.id} item={item}/>)}
+          </div>
+        </div>
+        <div className="App-ctas">CTAs</div>
+      </div>
+      <div className="App-blog">
+        <h1 className="App-blog-header">Hot from the press</h1>
+        <div className="App-blog-list">
+          {POSTS.map(p => <Post key={p.id} post={p}/>)}
+        </div>
+      </div>
+    </div>
+)}}
+
+function MjLink(props) {
+  return <Link activeClassName="active" {...props}/>;
+}
+
+export default class App extends Component {
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <div className="App-logo">
-            <a href="#"><img src="logo.jpg"/></a></div>
+          <div className="App-header-top">
+            <div className="App-logo">
+              <a href="#"><img src="logo.jpg"/></a>
+            </div>
+            <h1 className="App-name">
+              Marie Jordane
+            </h1>
+            <div className="App-infos">
+              <i className="fa fa-map-marker"/>11 rue Bedaine, 75017 Paris
+              <br/><i className="fa fa-whatsapp"/>whatsapp
+              <br/><i className="fa fa-phone"/>06 12 34 56 78
+              <br/><i className="fa fa-facebook"/> <i className="fa fa-instagram"/> <i className="fa fa-twitter"/>
+            </div>
+          </div>
           <div className="App-menu">
-            <a href="#">Home</a>
+            <MjLink to="/">Home</MjLink>
             <a href="#">Shop</a>
             <a href="#">Blog</a>
-            <a href="#">About us</a>
+            <MjLink to="/about">About us</MjLink>
           </div>
         </div>
         <div className="App-main">
-          <div className="App-catalog">
-            {CATALOG.slice(0, 6).map(item => <Item key={item.id} item={item}/>)}
-          </div>
-          <div className="App-ctas">CTAs</div>
-        </div>
-        <div className="App-blog">
-          <h1 className="App-blog-header">Hot from the press</h1>
-          <div className="App-blog-list">
-            {POSTS.map(p => <Post key={p.id} post={p}/>)}
-          </div>
+          {this.props.children}
         </div>
       </div>
     );
   }
 }
-
-export default App;

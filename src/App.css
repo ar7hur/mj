@@ -8,12 +8,31 @@ body {
   font-family: Helvetica Neue, sans-serif;
 }
 
+.App-menu .active {
+  color: blue;
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .App-header {
   background-color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 2px solid #F8F8F8
+}
+
+.App-header-top {
+  display: flex;
+  align-items: center;
+}
+
+.App-name {
+  margin-left: 5px;
+}
+
+.App-infos {
+  margin-left: auto;
 }
 
 .App-logo img {
@@ -43,30 +62,23 @@ body {
 
 .App-catalog {
   flex: 1; /* ctas is zero, so this one will take all available space */
+  max-width: 1200px;
+}
+
+.App-catalog-row {
+  display: flex;
 }
 
 .App-item {
-  width: 250px;
   margin: 10px;
-  display: inline-block;
-  position: relative;
 }
 
 .App-item-image {
   width: 100%;
 }
 
-.App-item-over {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  transition: 0.1s opacity ease-out;
-}
-
-.App-item:hover .App-item-over, .App-item:focus .App-item-over {
-  opacity: 1;
+.App-item-desc {
+  /*transition: 0.1s opacity ease-out;*/
 }
 
 .App-item-title {
@@ -96,4 +108,19 @@ body {
 .App-post-title {
   font-weight: 500;
 }
+
+@media (max-width: 700px) {
+  .App-ctas {
+    display: none;
+  }
+
+  .App-item {
+    margin: 0;
+  }
+
+  .App-item-desc {
+    display: none;
+  }
+}
+
 
